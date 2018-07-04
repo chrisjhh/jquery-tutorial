@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>No Conflict</title>
+    <script src="prototype.js"></script>
+    <script src="jquery-3.3.1.js"></script>
+    <script>
+      var $j = jQuery.noConflict();
+
+      $j(document).ready(function(){
+        $j("div").hide();
+      });
+
+      window.onload = function() {
+        // $ now has prototype meaning not JQuery object
+        var mainDiv = $("main");
+        console.log(mainDiv);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="main">Bla bla bla</div>
+  </body>
+</html>
