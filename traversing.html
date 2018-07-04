@@ -31,6 +31,10 @@
         var $sp2 = $("div.surrogateParent2");
         console.log($sp2.prevAll().toArray()); // [div.surrogateParent1, div.parent]
         
+        // Siblings in both directions
+        console.log($("div.surrogateParent1").siblings().toArray()); // [div.parent, div.surrogateParent2]
+        
+
       });
     </script>
   </head>
