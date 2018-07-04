@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Traversing</title>
+    <script src="jquery-3.3.1.js"></script>
+    <script>
+      
+      $(document).ready(function() {
+        // Parents
+        var $sc = $("span.subchild");
+        console.log($sc.parent().get(0)); // Should be <div class="child">
+        console.log($sc.parents("div.parent").get(0)); // Should also be <div class="child">
+        console.log($sc.parents().toArray()); // [div.child, div.parent, div.grandparent, body, html]
+        console.log($sc.parentsUntil("div.grandparent").toArray()); // [div.child, div.parent]
+        console.log($sc.closest("div").toArray()); // [div.child]
+        console.log($("div.child").closest("div").toArray()); // [div.child] -- self is included in search!
+
+        // Children
+        var $gp = $("div.grandparent");
+        console.log($gp.children("div").toArray()); // [div.parent, div.surrogateParent1, div.surrogateParent2]
+        console.log($gp.find("div").toArray()); // [div.parent, div.child, div.surrogateParent1, div.surrogateParent2]
+
+        // Siblings
+        var $p = $("div.parent");
+        console.log($p.next().toArray()); // [div.surrogateParent1]
+        console.log($p.prev().toArray()); // []
+        console.log($p.nextAll().toArray()); // [div.surrogateParent1, div.surrogateParent2]
+        console.log($p.nextAll().first().toArray()); // [div.surrogateParent1]
+        console.log($p.nextAll().last().toArray()); // [div.surrogateParent2]
+        var $sp2 = $("div.surrogateParent2");
+        console.log($sp2.prevAll().toArray()); // [div.surrogateParent1, div.parent]
+        
+      });
+    </script>
+  </head>
+  <body>
+      <div class="grandparent">
+          <div class="parent">
+              <div class="child">
+                  <span class="subchild"></span>
+              </div>
+          </div>
+          <div class="surrogateParent1"></div>
+          <div class="surrogateParent2"></div>
+      </div>
+  </body>
+</html>
