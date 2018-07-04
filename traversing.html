@@ -5,34 +5,41 @@
     <title>Traversing</title>
     <script src="jquery-3.3.1.js"></script>
     <script>
+
+      var report = function(message) {
+        // To console
+        console.log(message);
+        // To page
+        $("body").append(`<p>${message}</p>`);
+      };
       
       $(document).ready(function() {
         // Parents
         var $sc = $("span.subchild");
-        console.log($sc.parent().get(0)); // Should be <div class="child">
-        console.log($sc.parents("div.parent").get(0)); // Should also be <div class="child">
-        console.log($sc.parents().toArray()); // [div.child, div.parent, div.grandparent, body, html]
-        console.log($sc.parentsUntil("div.grandparent").toArray()); // [div.child, div.parent]
-        console.log($sc.closest("div").toArray()); // [div.child]
-        console.log($("div.child").closest("div").toArray()); // [div.child] -- self is included in search!
+        report($sc.parent().get(0)); // Should be <div class="child">
+        report($sc.parents("div.parent").get(0)); // Should also be <div class="child">
+        report($sc.parents().get()); // [div.child, div.parent, div.grandparent, body, html]
+        report($sc.parentsUntil("div.grandparent").get()); // [div.child, div.parent]
+        report($sc.closest("div").get()); // [div.child]
+        report($("div.child").closest("div").get()); // [div.child] -- self is included in search!
 
         // Children
         var $gp = $("div.grandparent");
-        console.log($gp.children("div").toArray()); // [div.parent, div.surrogateParent1, div.surrogateParent2]
-        console.log($gp.find("div").toArray()); // [div.parent, div.child, div.surrogateParent1, div.surrogateParent2]
+        report($gp.children("div").get()); // [div.parent, div.surrogateParent1, div.surrogateParent2]
+        report($gp.find("div").get()); // [div.parent, div.child, div.surrogateParent1, div.surrogateParent2]
 
         // Siblings
         var $p = $("div.parent");
-        console.log($p.next().toArray()); // [div.surrogateParent1]
-        console.log($p.prev().toArray()); // []
-        console.log($p.nextAll().toArray()); // [div.surrogateParent1, div.surrogateParent2]
-        console.log($p.nextAll().first().toArray()); // [div.surrogateParent1]
-        console.log($p.nextAll().last().toArray()); // [div.surrogateParent2]
+        report($p.next().get()); // [div.surrogateParent1]
+        report($p.prev().get()); // []
+        report($p.nextAll().get()); // [div.surrogateParent1, div.surrogateParent2]
+        report($p.nextAll().first().get()); // [div.surrogateParent1]
+        report($p.nextAll().last().get()); // [div.surrogateParent2]
         var $sp2 = $("div.surrogateParent2");
-        console.log($sp2.prevAll().toArray()); // [div.surrogateParent1, div.parent]
+        report($sp2.prevAll().get()); // [div.surrogateParent1, div.parent]
         
         // Siblings in both directions
-        console.log($("div.surrogateParent1").siblings().toArray()); // [div.parent, div.surrogateParent2]
+        report($("div.surrogateParent1").siblings().get()); // [div.parent, div.surrogateParent2]
         
 
       });
